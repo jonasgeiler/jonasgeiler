@@ -1,9 +1,9 @@
-import type { AsyncFunctionArguments } from "@actions/github-script";
-import type { Api } from "@octokit/plugin-rest-endpoint-methods";
-import type { PaginateInterface } from "@octokit/plugin-paginate-rest";
-import { fromURL as loadSVGFromURL } from "cheerio";
 import { readFile, writeFile } from "node:fs/promises";
 import { join as joinPaths } from "node:path";
+import type { AsyncFunctionArguments } from "@actions/github-script";
+import type { PaginateInterface } from "@octokit/plugin-paginate-rest";
+import type { Api } from "@octokit/plugin-rest-endpoint-methods";
+import { fromURL as loadSVGFromURL } from "cheerio";
 
 const PROJECT_ROOT = joinPaths(import.meta.dirname, "..", "..");
 
@@ -38,11 +38,12 @@ function formatNumber(num: number): string {
  * @param github Octokit GitHub client instance.
  * @param username Name of the user to lookup.
  */
-async function getNotOrgQualifiers(github: ScriptFunctionArgs["github"], username: string): Promise<string> {
+async function getNotOrgQualifiers(
+	github: ScriptFunctionArgs["github"],
+	username: string,
+): Promise<string> {
 	const { data } = await github.rest.orgs.listForUser({ username });
-	return data
-		.map((org) => `-org:${org.login}`)
-		.join(" ");
+	return data.map((org) => `-org:${org.login}`).join(" ");
 }
 
 /**
@@ -51,17 +52,24 @@ async function getNotOrgQualifiers(github: ScriptFunctionArgs["github"], usernam
  * @param github Octokit GitHub client instance.
  * @param byAuthor Which author/user to get the count for.
  */
-async function getTotalContributions(github: ScriptFunctionArgs["github"], byAuthor: string): Promise<string> {
+async function getTotalContributions(
+	github: ScriptFunctionArgs["github"],
+	byAuthor: string,
+): Promise<string> {
 	let notOrgQualifiers = await getNotOrgQualifiers(github, byAuthor);
 	// Prepend a space separator if any qualifiers were returned.
-	if (notOrgQualifiers) notOrgQualifiers = " " + notOrgQualifiers;
+	if (notOrgQualifiers) notOrgQualifiers = ` ${notOrgQualifiers}`;
 
 	// These return only public data (as it should for OPEN-source contributions)
 	// as long as the GitHub client token doesn't have private organization read
 	// permissions.
 	const [
-		{ data: { total_count: issuesCount } },
-		{ data: { total_count: pullRequestsCount } },
+		{
+			data: { total_count: issuesCount },
+		},
+		{
+			data: { total_count: pullRequestsCount },
+		},
 	] = await Promise.all([
 		github.rest.search.issuesAndPullRequests({
 			q: `is:issue reason:completed author:${byAuthor} -user:${byAuthor}${notOrgQualifiers}`,
@@ -71,7 +79,7 @@ async function getTotalContributions(github: ScriptFunctionArgs["github"], byAut
 			q: `is:pr is:merged author:${byAuthor} -user:${byAuthor}${notOrgQualifiers}`,
 			per_page: 1, // We're only interested in the total count.
 		}),
-	])
+	]);
 
 	return formatNumber(pullRequestsCount + issuesCount);
 }
@@ -81,11 +89,15 @@ async function getTotalContributions(github: ScriptFunctionArgs["github"], byAut
  * and extracts the total stars earned and commits authored from it.
  * @param username Which author/user to get the stats for.
  */
-async function getTotalStarsEarnedAndCommitsAuthored(username: string): Promise<{
+async function getTotalStarsEarnedAndCommitsAuthored(
+	username: string,
+): Promise<{
 	totalStarsEarned: string;
-	totalCommitsAuthored: string
+	totalCommitsAuthored: string;
 }> {
-	const svgURL = new URL("https://github-stats-extended.vercel.app/api?hide_rank=true&hide_title=true&include_all_commits=true&disable_animations=true&cache_seconds=86400");
+	const svgURL = new URL(
+		"https://github-stats-extended.vercel.app/api?hide_rank=true&hide_title=true&include_all_commits=true&disable_animations=true&cache_seconds=86400",
+	);
 	svgURL.searchParams.set("username", username);
 
 	const svg$ = await loadSVGFromURL(svgURL);
@@ -102,7 +114,9 @@ async function getTotalStarsEarnedAndCommitsAuthored(username: string): Promise<
  * @param author Which npm author/user to get the stats for.
  */
 async function getNPMDownloadsPerYear(author: string) {
-	const svgURL = new URL("https://img.shields.io/npm-stat/dy/?style=social&label=&cacheSeconds=15768000");
+	const svgURL = new URL(
+		"https://img.shields.io/npm-stat/dy/?style=social&label=&cacheSeconds=15768000",
+	);
 	svgURL.pathname += author;
 
 	const svg$ = await loadSVGFromURL(svgURL);
@@ -143,7 +157,10 @@ export default async ({ github, context }: ScriptFunctionArgs) => {
 
      ${totalContributions.padEnd(statisticsPadEnd)} total contributions to open-source community projects`;
 
-	let readme = await readFile(joinPaths(PROJECT_ROOT, "README.md.tmpl"), "utf8");
+	let readme = await readFile(
+		joinPaths(PROJECT_ROOT, "README.md.tmpl"),
+		"utf8",
+	);
 	readme = readme.replace("{{statistics}}", statistics);
 	await writeFile(joinPaths(PROJECT_ROOT, "README.md"), readme);
 };

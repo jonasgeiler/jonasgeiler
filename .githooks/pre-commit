@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail -x
+#####################################
+#           Git hook file           #
+# https://git-scm.com/docs/githooks #
+#####################################
+
+cd .github/scripts
+export PATH="node_modules/.bin:${PATH}"
+
+biome check --staged --no-errors-on-unmatched
