@@ -1,0 +1,68 @@
+name: Update README
+
+on:
+  schedule:
+    - cron: 0 4 * * 1 # At 04:00 on Monday.
+
+  push:
+    branches:
+      - main
+    paths:
+      - README.md.tmpl
+
+  workflow_dispatch:
+
+jobs:
+  update-readme:
+    name: Update README
+
+    runs-on: ubuntu-slim
+    defaults:
+      run:
+        shell: bash --noprofile --norc -euxo pipefail {0}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+        with:
+          persist-credentials: true # We need those later.
+
+      - name: Update README
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          # language=javascript
+          script: |
+            const workspace = "${{ github.workspace }}";
+            const { default: script } = await import(workspace + "/.github/scripts/update-readme.ts")
+            await script({ context, core, github, octokit, getOctokit, exec, glob, io, require, __original_require__, workspace });
+
+      - name: Commit & push potential changes
+        # language="shell script"
+        run: |
+          _log() {
+              local level=${1}
+              local message=${2}
+
+              echo "$level | $message";
+          }
+
+          if [ -z "$(git symbolic-ref HEAD)" ]; then
+              echo "Warning: Repository is in a detached HEAD state. git-auto-commit will likely handle this automatically. To avoid it, check out a branch using the ref option in actions/checkout.";
+          else
+              echo "Repository is on a branch.";
+          fi
+
+          if [ -n "$(git status -s .)" ]; then
+              # Add files.
+              git add .
+
+              # Check dirty state of repo again using git-diff.
+              if [ -n "$(git diff --staged)" ]; then
+                  git commit -m "chore: readme update $(date -I)"
+                  git push origin
+              else
+                  echo "Working tree clean. Nothing to commit.";
+              fi
+          else
+            echo "Working tree clean. Nothing to commit.";
+          fi
