@@ -55,13 +55,6 @@ jobs:
       - name: Commit & push potential changes
         # language="shell script"
         run: |
-          headSymbolicRef="$(git symbolic-ref HEAD)"
-          if [[ -z "${headSymbolicRef}" ]]; then
-              echo "Warning: Repository is in a detached HEAD state. The script will likely handle this automatically. To avoid it, check out a branch using the ref option in actions/checkout.";
-          else
-              echo "Repository is on a branch.";
-          fi
-
           # Check dirty state of repo using git-status.
           gitStatus="$(git status -s .)"
           if [[ -n "${gitStatus}" ]]; then
@@ -73,7 +66,10 @@ jobs:
               if [[ -n "${gitStatus}" ]]; then
                   # Create a new commit.
                   date="$(date -I)"
-                  git commit -m "chore: readme update ${date}"
+                  git \
+                      -c user.name="github-actions[bot]" \
+                      -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+                      commit -m "chore: readme update ${date}"
 
                   # Push new commit.
                   git push origin
