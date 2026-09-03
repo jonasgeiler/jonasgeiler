@@ -11,7 +11,7 @@ STATISTICS
 
      4.2k   total commits authored ⏲
 
-     149    total contributions to open-source community rojects 🕮
+     149    total contributions to open-source community projects 🕮
 
 TOP LANGUAGES
 -------------
