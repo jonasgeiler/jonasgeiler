@@ -1,15 +1,10 @@
-```manpage
-JONASGEILER(7)               User Profile                JONASGEILER(7)
-
-NAME
-     jonas geiler - he/him
-
-DESCRIPTION
-     Passionate  software  developer and open-source enthusiast, always
-     experimenting  around  with  new  ideas and overflowing with side-
-     projects.
+```md
+README
+======
 
 STATISTICS
+----------
+
      1.2M   npm downloads per year
 
      1.3k   total stars earned
@@ -19,6 +14,8 @@ STATISTICS
      149    total contributions to open-source community projects
 
 TOP LANGUAGES
+-------------
+
      25.31% JavaScript/TypeScript
 
      18.58% Lua
@@ -27,25 +24,16 @@ TOP LANGUAGES
 
      7.56%  HTML
 
-STANDARDS
-     POSIX.1-2001FAKE, POSIX.1-2008FAKE, POSIX.1-2017THISONEISREAL.
+     5.87%  C
 
-SEE ALSO
-     zsoelim(1),  cats(4),  mandb(8),  hotcoco(3), groff(1), humans(8),
-     manpath(5),  happiness(1),   whatis(1),   existence(7),  catman(8)
-
-     Documentation  for  some topics may be available in other formats,
-     such as info(1) or HTML.
-
-     Some documentation may be incomplete, contradictory, or written by
-     people who were awake at 3am.
-
-HISTORY
-     21st     December     2014     –     present day:     Jonas Geiler
-     <hi@jonasgeiler.com> is developing and maintaining these projects.
+     2.22%  Go
 
 BUGS
+----
+
+     Report any severe brain issues of Jonas Geiler here:
+
      https://github.com/jonasgeiler/jonasgeiler/issues
 
-9.22.1                         2026-09-26                        MAN(1)
+     (only for medical professionals)
 ```
