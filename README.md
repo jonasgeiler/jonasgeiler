@@ -29,13 +29,4 @@ TOP LANGUAGES
      6.60%  CSS
 
      5.44%  Shell
-
-BUGS
-----
-
-     Report any severe brain issues of Jonas Geiler here:
-
-     https://github.com/jonasgeiler/jonasgeiler/issues
-
-     (only for medical professionals)
 ```
