@@ -204,9 +204,8 @@ async function getTopLanguages(username: string): Promise<[string, string][]> {
 }
 
 export default async ({ github, context }: ScriptFunctionArgs) => {
-	// TODO: Fetch data for top languages and display it.
-
 	const owner = context.repo.owner;
+
 	const [
 		npmDownloadsPerYear,
 		{ totalStarsEarned, totalCommitsAuthored },
