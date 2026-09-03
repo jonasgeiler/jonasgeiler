@@ -9,6 +9,7 @@ on:
       - main
     paths:
       - README.md.tmpl
+      - .github/scripts/update-readme.ts
 
   workflow_dispatch:
 

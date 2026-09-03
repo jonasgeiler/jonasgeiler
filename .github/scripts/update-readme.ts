@@ -149,13 +149,13 @@ export default async ({ github, context }: ScriptFunctionArgs) => {
 		totalCommitsAuthored.length,
 		totalContributions.length,
 	);
-	const statistics = `     ${npmDownloadsPerYear.padEnd(statisticsPadEnd)} npm downloads per year
+	const statistics = `     ${npmDownloadsPerYear.padEnd(statisticsPadEnd)} npm downloads per year ↓
 
-     ${totalStarsEarned.padEnd(statisticsPadEnd)} total stars earned
+     ${totalStarsEarned.padEnd(statisticsPadEnd)} total stars earned ★
 
-     ${totalCommitsAuthored.padEnd(statisticsPadEnd)} total commits authored
+     ${totalCommitsAuthored.padEnd(statisticsPadEnd)} total commits authored ⏲
 
-     ${totalContributions.padEnd(statisticsPadEnd)} total contributions to open-source community projects`;
+     ${totalContributions.padEnd(statisticsPadEnd)} total contributions to open-source community rojects 🕮`;
 
 	let readme = await readFile(
 		joinPaths(PROJECT_ROOT, "README.md.tmpl"),
