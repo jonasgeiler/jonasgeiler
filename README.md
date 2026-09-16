@@ -17,17 +17,15 @@ STATISTICS
 TOP LANGUAGES
 -------------
 
-     35.27% JavaScript/TypeScript
+     37.06% JavaScript/TypeScript
 
-     20.60% Lua
+     21.65% Lua
 
-     15.03% HTML
+     15.79% HTML
 
-     13.27% Svelte
+     13.94% Svelte
 
-     5.80%  C
+     6.10%  C
 
-     5.21%  Shell
-
-     4.82%  CSS
+     5.47%  Shell
 ```
