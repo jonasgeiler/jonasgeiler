@@ -135,7 +135,7 @@ async function getNPMDownloadsPerYear(author: string) {
  */
 async function getTopLanguages(username: string): Promise<[string, string][]> {
 	const svgURL = new URL(
-		"https://github-stats-extended.vercel.app/api/top-langs?hide_title=true&langs_count=8&disable_animations=true&size_weight=0.5&count_weight=0.5&cache_seconds=86400",
+		"https://github-stats-extended.vercel.app/api/top-langs?hide_title=true&langs_count=7&disable_animations=true&size_weight=0.5&count_weight=0.5&cache_seconds=86400",
 	);
 	svgURL.searchParams.set("username", username);
 	svgURL.searchParams.set("hide", "PHP"); // My PHP days are pretty much over...
