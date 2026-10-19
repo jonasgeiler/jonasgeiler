@@ -9,7 +9,7 @@ STATISTICS
 
      1.3k   total stars earned ★
 
-     4.2k   total commits authored ⏲
+     4.4k   total commits authored ⏲
 
      150    total contributions to open-source community projects 🕮
 
@@ -17,15 +17,15 @@ STATISTICS
 TOP LANGUAGES
 -------------
 
-     37.06% JavaScript/TypeScript
+     38.04% JavaScript/TypeScript
 
-     21.65% Lua
+     21.23% Lua
 
-     15.79% HTML
+     15.48% HTML
 
-     13.94% Svelte
+     13.67% Svelte
 
-     6.10%  C
+     5.98%  C
 
-     5.47%  Shell
+     5.59%  Shell
 ```
