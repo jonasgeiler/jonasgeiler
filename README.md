@@ -17,9 +17,9 @@ STATISTICS
 TOP LANGUAGES
 -------------
 
-     38.04% JavaScript/TypeScript
+     38.06% JavaScript/TypeScript
 
-     21.23% Lua
+     21.22% Lua
 
      15.48% HTML
 
